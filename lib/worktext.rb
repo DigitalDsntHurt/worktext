@@ -25,8 +25,8 @@ module Worktext
 
 	def get_stuff_from_page(page,xpath)
 		Nokogiri::HTML(RestClient::Resource.new(page, :verify_ssl => false).get).xpath(xpath).map{|item|
-		item.text.strip if item != nil
-	}
+			item.text.strip if item != nil
+		}
 	end
 
 	def get_lines_from_file(path)
