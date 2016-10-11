@@ -24,9 +24,21 @@ module Worktext
 	end
 
 	def get_stuff_from_page(page,xpath)
-		Nokogiri::HTML(RestClient::Resource.new(page, :verify_ssl => false).get).xpath(xpath).map{|item|
-			item.text.strip if item != nil
-		}
+		
+		begin
+		  request = RestClient::Resource.new(page, :verify_ssl => false).get
+
+		rescue RestClient::NotFound => not_found
+		  return not_found
+		rescue 
+		  return nil
+		else
+		  	payload = []
+		  	Nokogiri::HTML(request).xpath(xpath).map{|item|
+				payload << item.text.strip if item != nil
+			}
+			return payload
+		end
 	end
 
 	def get_lines_from_file(path)
@@ -34,7 +46,7 @@ module Worktext
 		File.open(path).each_line{|line| 
 			lines << line.gsub("\n","") if line.length > 1
 		}
-	return lines
+		return lines
 	end
 
 # Get headlines, pub times & article text from NBCNews.com
