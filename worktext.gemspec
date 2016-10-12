@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "works on text for nlp"
   spec.description   = "gem to reflect statistical learnings & their ruby implementations"
-  spec.homepage      = "digitaldoesnthurt.com" #http://mygemserver.com
+  spec.homepage      = "https://github.com/DigitalDsntHurt/worktext"
   spec.license       = "MIT"
 
 
